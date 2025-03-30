@@ -8,23 +8,29 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Forza architettura AMD64
+        run: export ARCHFLAGS='-arch x86_64'
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          architecture: 'x64'  # Usa AMD64
           cache: 'yarn'
+
+      - name: Install distutils per Python
+        run: python3 -m ensurepip && python3 -m pip install setuptools
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
       - name: Build project for amd64
-        run: |
-          export ARCHFLAGS='-arch x86_64'
-          yarn dist
+        run: yarn dist
 
       - name: Archive production artifacts
         run: |
