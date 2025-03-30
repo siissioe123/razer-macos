@@ -29,6 +29,15 @@ jobs:
           source venv/bin/activate
           python3 -m pip install --upgrade pip
           python3 -m pip install setuptools
+          # Installa distutils (se non disponibile)
+          python3 -m pip install distutils
+          python3 -m pip install gyp
+
+      - name: Install system dependencies
+        run: |
+          # Assicurati che `make` e altre dipendenze siano presenti
+          brew install make
+          brew install python@3.13  # Installazione di Python 3.13 per compatibilità
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
