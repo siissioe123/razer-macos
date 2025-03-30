@@ -23,8 +23,12 @@ jobs:
           architecture: 'x64'  # Usa AMD64
           cache: 'yarn'
 
-      - name: Install distutils per Python
-        run: python3 -m ensurepip && python3 -m pip install setuptools
+      - name: Setup Python virtual environment
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          python3 -m pip install --upgrade pip
+          python3 -m pip install setuptools
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
