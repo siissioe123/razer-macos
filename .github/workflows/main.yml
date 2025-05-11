@@ -26,7 +26,7 @@ jobs:
       - name: Install system dependencies
         run: |
           brew install make
-          brew install python@3.13
+          brew install python@3.11
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
